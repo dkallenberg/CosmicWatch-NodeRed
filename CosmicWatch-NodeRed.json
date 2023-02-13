@@ -1,6 +1,6 @@
 [
     {
-        "id": "6caafa316e63ba15",
+        "id": "44660e89f5734085",
         "type": "tab",
         "label": "Cosmic Watch Live",
         "disabled": false,
@@ -8,20 +8,20 @@
         "env": []
     },
     {
-        "id": "2de08849a8e688a4",
+        "id": "c2cc3db6d58c5157",
         "type": "group",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "style": {
             "fill": "#c8e7a7",
             "label": true
         },
         "nodes": [
-            "606c0b3e9733764b",
-            "4491cfb6c81daf38",
-            "55268fbd20e72ff7",
-            "5752e603a714bd63",
-            "05cc7a816e0b0a93"
+            "997bced252ce6886",
+            "42bacdb55dd361d1",
+            "bcd961f22fe3e78c",
+            "6540c212e1652365",
+            "f46f23ccbba77c44"
         ],
         "x": 34,
         "y": 79,
@@ -29,10 +29,10 @@
         "h": 122
     },
     {
-        "id": "55268fbd20e72ff7",
+        "id": "bcd961f22fe3e78c",
         "type": "inject",
-        "z": "6caafa316e63ba15",
-        "g": "2de08849a8e688a4",
+        "z": "44660e89f5734085",
+        "g": "c2cc3db6d58c5157",
         "name": "Start Time",
         "props": [
             {
@@ -50,16 +50,16 @@
         "y": 120,
         "wires": [
             [
-                "4491cfb6c81daf38",
-                "05cc7a816e0b0a93"
+                "42bacdb55dd361d1",
+                "f46f23ccbba77c44"
             ]
         ]
     },
     {
-        "id": "4491cfb6c81daf38",
+        "id": "42bacdb55dd361d1",
         "type": "function",
-        "z": "6caafa316e63ba15",
-        "g": "2de08849a8e688a4",
+        "z": "44660e89f5734085",
+        "g": "c2cc3db6d58c5157",
         "name": "File Name",
         "func": "var a = new Date().toString();\nvar parts = a.split(\" \");\nvar t = parts[4].split(\":\");\nvar name = parts[3] + \"_\" + parts[1] + \"_\" + parts[2] + \"_\" +t[0]+t[1]+t[2];\n//node.warn(name);\nvar fullName = \"/Users/dkallenberg/Documents/CosmicWatch/CW_\" + name + \".txt\";\n//node.warn(fullName);\nglobal.set(\"filename\",fullName);\nmsg.filename = fullName;\nmsg.payload = \"CW_\"+ name;\nfullName = \"/Users/dkallenberg/Documents/CosmicWatch/CW_\" + name +\"Plus\"+ \".txt\"\nglobal.set(\"filenamePlus\", fullName);\nreturn msg;",
         "outputs": 1,
@@ -71,17 +71,17 @@
         "y": 120,
         "wires": [
             [
-                "5752e603a714bd63"
+                "6540c212e1652365"
             ]
         ]
     },
     {
-        "id": "05cc7a816e0b0a93",
+        "id": "f46f23ccbba77c44",
         "type": "function",
-        "z": "6caafa316e63ba15",
-        "g": "2de08849a8e688a4",
+        "z": "44660e89f5734085",
+        "g": "c2cc3db6d58c5157",
         "name": "set Last",
-        "func": "global.set(\"minLastCount\",0);\nglobal.set(\"fiveLastCount\",0);\nglobal.set(\"hourLastCount\",0);\nglobal.set(\"minLastTime\", 0);\nglobal.set(\"fiveLastTime\", 0);\nglobal.set(\"hourLastTime\", 0);\nglobal.set(\"minLastUp\", 0);\nglobal.set(\"fiveLastUp\", 0);\nglobal.set(\"hourLastUp\", 0);\nglobal.set(\"iLastTime\", 0);\nglobal.set(\"iLastCount\", 0);\nreturn msg;",
+        "func": "global.set(\"minLastCount\",0);\nglobal.set(\"fiveLastCount\",0);\nglobal.set(\"hourLastCount\",0);\nglobal.set(\"minLastTime\", 0);\nglobal.set(\"fiveLastTime\", 0);\nglobal.set(\"hourLastTime\", 0);\nglobal.set(\"minLastUp\", 0);\nglobal.set(\"fiveLastUp\", 0);\nglobal.set(\"hourLastUp\", 0);\nglobal.set(\"iLastTime\", 0);\nglobal.set(\"iLastCount\", 0);\nglobal.set(\"minLoop\", 0);\nglobal.set(\"minLoopsLastUp\", 0);\nglobal.set(\"minLastT\", 0);\nglobal.set(\"minLastUpT\", 0);\nglobal.set(\"fiveLoop\", 0);\nglobal.set(\"hrLoop\", 0);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -94,10 +94,10 @@
         ]
     },
     {
-        "id": "606c0b3e9733764b",
+        "id": "997bced252ce6886",
         "type": "inject",
-        "z": "6caafa316e63ba15",
-        "g": "2de08849a8e688a4",
+        "z": "44660e89f5734085",
+        "g": "c2cc3db6d58c5157",
         "name": "12 AM New File",
         "props": [
             {
@@ -115,15 +115,15 @@
         "y": 160,
         "wires": [
             [
-                "4491cfb6c81daf38"
+                "42bacdb55dd361d1"
             ]
         ]
     },
     {
-        "id": "5752e603a714bd63",
+        "id": "6540c212e1652365",
         "type": "ui_text",
-        "z": "6caafa316e63ba15",
-        "g": "2de08849a8e688a4",
+        "z": "44660e89f5734085",
+        "g": "c2cc3db6d58c5157",
         "group": "5213ed1253eb0c1d",
         "order": 7,
         "width": 0,
@@ -138,9 +138,9 @@
         "wires": []
     },
     {
-        "id": "4867080c96f1342d",
+        "id": "4e42efc9823fe54d",
         "type": "comment",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Setting the file name",
         "info": "",
         "x": 150,
@@ -148,9 +148,9 @@
         "wires": []
     },
     {
-        "id": "c2084f95de6ea353",
+        "id": "9e68acb3423ceb7e",
         "type": "function",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Add Filename",
         "func": "msg.filename = global.get(\"filenamePlus\");\nvar data =\"\";\ndata = msg.data[0];\nvar i=1;\nwhile(i<10){\n    data = data + \",\" + msg.data[i];\n}\nmsg.payload = data;\nreturn msg;",
         "outputs": 1,
@@ -162,14 +162,14 @@
         "y": 1060,
         "wires": [
             [
-                "d0c6884ac6dcd04e"
+                "2db93dd0f85418ed"
             ]
         ]
     },
     {
-        "id": "d0c6884ac6dcd04e",
+        "id": "2db93dd0f85418ed",
         "type": "delay",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "pauseType": "delay",
         "timeout": "200",
@@ -187,14 +187,14 @@
         "y": 1060,
         "wires": [
             [
-                "1f5adf930b880fd4"
+                "d6b5554d7f9f9bbc"
             ]
         ]
     },
     {
-        "id": "1f5adf930b880fd4",
+        "id": "d6b5554d7f9f9bbc",
         "type": "file",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "filename": "filename",
         "filenameType": "msg",
@@ -209,9 +209,9 @@
         ]
     },
     {
-        "id": "a9b087b487e937c1",
+        "id": "c96580a7963403b0",
         "type": "debug",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "debug 15",
         "active": false,
         "tosidebar": true,
@@ -226,9 +226,9 @@
         "wires": []
     },
     {
-        "id": "79bd18eddf95249d",
+        "id": "4ee7086c64309978",
         "type": "function",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Add Filename",
         "func": "msg.filename = global.get(\"filename\");\nreturn msg;",
         "outputs": 1,
@@ -240,14 +240,14 @@
         "y": 360,
         "wires": [
             [
-                "85412d7f405e4ab2"
+                "7611eae29e1ce193"
             ]
         ]
     },
     {
-        "id": "3ca97adec6f3f750",
+        "id": "5e6f5764765204c9",
         "type": "switch",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Line types",
         "property": "payload",
         "propertyType": "msg",
@@ -292,31 +292,31 @@
         "y": 320,
         "wires": [
             [
-                "595545c09eef748c"
+                "a378a414a23d27d2"
             ],
             [
-                "595545c09eef748c"
+                "a378a414a23d27d2"
             ],
             [
-                "595545c09eef748c"
+                "a378a414a23d27d2"
             ],
             [
-                "595545c09eef748c"
+                "a378a414a23d27d2"
             ],
             [
-                "595545c09eef748c"
+                "a378a414a23d27d2"
             ],
             [
-                "7fd55d82258683a7",
-                "be4628635e405821",
-                "228360111943831e"
+                "e55dacd73114b699",
+                "1f744c6202a8a30b",
+                "41a84a1b76cedbcb"
             ]
         ]
     },
     {
-        "id": "85412d7f405e4ab2",
+        "id": "7611eae29e1ce193",
         "type": "delay",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "pauseType": "delay",
         "timeout": "200",
@@ -334,14 +334,14 @@
         "y": 360,
         "wires": [
             [
-                "402df1a7496179ad"
+                "63f37bbb3bbb8fa6"
             ]
         ]
     },
     {
-        "id": "9178b635d0011d4e",
+        "id": "fa928c08b3b45e54",
         "type": "debug",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "debug 13",
         "active": false,
         "tosidebar": true,
@@ -356,24 +356,24 @@
         "wires": []
     },
     {
-        "id": "1f6c385b259d8eda",
+        "id": "ce389ee75ea5ac23",
         "type": "serial in",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "CW2",
-        "serial": "c7cdfd066443399c",
+        "serial": "78ca4bb3ec479a3e",
         "x": 90,
         "y": 520,
         "wires": [
             [
-                "3ca97adec6f3f750",
-                "8e5908713477aeb6"
+                "5e6f5764765204c9",
+                "9e302dfca5559d54"
             ]
         ]
     },
     {
-        "id": "402df1a7496179ad",
+        "id": "63f37bbb3bbb8fa6",
         "type": "file",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "filename": "filename",
         "filenameType": "msg",
@@ -388,9 +388,9 @@
         ]
     },
     {
-        "id": "f98137b5597cc70d",
+        "id": "9cbe7dd44ddcb00f",
         "type": "function",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Average Rate",
         "func": "var data = msg.data;\nvar uptime = (data[1] - data[4]) / 1000;\nmsg.uptime = uptime;\n//node.warn(data5[0]);\n//node.warn(data);\n\nif(data[0]>10){\n    var avg = (data[0] / uptime);\n    if(avg < 5){\n        msg.count = data[0];\n        var time = (new Date(uptime * 1000)).toUTCString().match(/(\\d\\d:\\d\\d:\\d\\d)/)[0];\n        msg.payload = avg.toFixed(3);\n        var onTime = data[1]/1000;\n        msg.timeTotalms = onTime;\n        //msg.timeTotal = (new Date(onTime)).toUTCString().match(/(\\d\\d:\\d\\d:\\d\\d)/)[1];\n        msg.topic = \"Average Rate\";\n        msg.uptimeDisplay = time;\n        msg.data [7] = avg.toFixed(3);\n        return [msg, msg];\n    }\n} else {\n    return [null,msg];\n}\n",
         "outputs": 2,
@@ -402,24 +402,24 @@
         "y": 460,
         "wires": [
             [
-                "a671a3a5a2edad57",
-                "19740a2291c8ac63",
-                "4fc446d273f95848",
-                "63194e6fdf2dbd02",
-                "03ac0a2dfd0ffadb",
-                "7e492075461da806"
+                "7a9291d87bc62c86",
+                "58109fab46ec9151",
+                "d8bcb30515be6062",
+                "6e375e980f68089e",
+                "22a9f5a818f46403",
+                "2a0774053e265059"
             ],
             [
-                "f30598f4735b1b4a"
+                "0112d7e49316cf43"
             ]
         ]
     },
     {
-        "id": "f30598f4735b1b4a",
+        "id": "227cda03c34e07b9",
         "type": "function",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Min Rate",
-        "func": "var data = msg.data;\nvar lastCount = global.get(\"minLastCount\");\nvar lastTime = global.get(\"minLastTime\");\nvar lastup = global.get(\"minLastUp\");\nvar uptime = msg.uptime;\nvar dTime = (uptime - lastup);\nif(dTime >=60){\n    global.set(\"minLastCount\", data[0]);\n    global.set(\"minLastTime\", data[1]);\n    global.set(\"minLastUp\", uptime);\n    var avg = (data[0]-lastCount) / dTime;\n    msg.payload = avg.toFixed(3);\n    msg.topic = \"1 Min\";\n    data[8]=avg.toFixed(3);\n    msg.data =data;\n    var msg2 ={payload: data[5], topic: \"Temp [C]\"};\n    return [msg, msg2, msg];\n} else{\n    return [ null, null, msg];\n}",
+        "func": "var min = msg.oneMin;\nif(msg.oneMin === true){\n    var data = msg.data;\n    var lastCount = global.get(\"minLastCount\");\n    var lastTime = global.get(\"minLastTime\");\n    var lastup = global.get(\"minLastUp\");\n    var uptime = msg.uptime;\n    var dTime = (uptime - lastup);\n    global.set(\"minLastCount\", data[0]);\n    global.set(\"minLastTime\", data[1]);\n    global.set(\"minLastUp\", uptime);\n    var avg = (data[0]-lastCount) / dTime;\n    msg.payload = avg.toFixed(3);\n    msg.topic = \"1 Min\";\n    data[8]=avg.toFixed(3);\n    msg.data =data;\n    var msg2 ={payload: data[5], topic: \"Temp [C]\"};\n    return [msg, msg2, msg];\n} else{\n    return [ null, null, msg];\n}",
         "outputs": 3,
         "noerr": 0,
         "initialize": "",
@@ -429,24 +429,24 @@
         "y": 680,
         "wires": [
             [
-                "7e492075461da806",
-                "fedc4701c1075b45",
-                "050a722ce34c7fe5"
+                "2a0774053e265059",
+                "5986096db8ef31e6",
+                "dd8fb86fd9663da2"
             ],
             [
-                "65c1d05de9e5cf4c"
+                "11d8a06ea111dc21"
             ],
             [
-                "20749ff8fd6d43a3"
+                "0140e20729bec04d"
             ]
         ]
     },
     {
-        "id": "20749ff8fd6d43a3",
+        "id": "0140e20729bec04d",
         "type": "function",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "5 Min Rate",
-        "func": "var data = msg.data;\nvar lastCount = global.get(\"fiveLastCount\");\nvar lastTime = global.get(\"fiveLastTime\");\nvar lastup = global.get(\"fiveLastUp\");\nvar uptime = msg.uptime;\nvar dTime = (uptime - lastup);\nif (dTime >= 300) {\n    global.set(\"fiveLastCount\", data[0]);\n    global.set(\"fiveLastTime\", data[1]);\n    global.set(\"fiveLastUp\", uptime);\n    var avg = (data[0] - lastCount) / dTime;\n    msg.payload = avg.toFixed(3);\n    data[9]= msg.payload;\n    msg.data = data;\n    msg.topic = \"5 Min\";\n    return [msg, msg];\n} else {\n    return [null, msg];\n}",
+        "func": "var fiveMin = msg.fiveMin;\nif (fiveMin === true) {\n    var data = msg.data;\n    var lastCount = global.get(\"fiveLastCount\");\n    var lastTime = global.get(\"fiveLastTime\");\n    var lastup = global.get(\"fiveLastUp\");\n    var uptime = msg.uptime;\n    var dTime = (uptime - lastup);\n    global.set(\"fiveLastCount\", data[0]);\n    global.set(\"fiveLastTime\", data[1]);\n    global.set(\"fiveLastUp\", uptime);\n    var avg = (data[0] - lastCount) / dTime;\n    msg.payload = avg.toFixed(3);\n    data[9]= msg.payload;\n    msg.data = data;\n    msg.topic = \"5 Min\";\n    return [msg, msg];\n} else {\n    return [null, msg];\n}",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
@@ -456,21 +456,21 @@
         "y": 820,
         "wires": [
             [
-                "bbebf31bac14ccab",
-                "0a592267f1585ba1",
-                "7e492075461da806"
+                "f756b240d0a6549b",
+                "e2453141ff7e2a57",
+                "2a0774053e265059"
             ],
             [
-                "6a1299678044f3ae"
+                "9ef9843f30ba682f"
             ]
         ]
     },
     {
-        "id": "6a1299678044f3ae",
+        "id": "9ef9843f30ba682f",
         "type": "function",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "hour Rate",
-        "func": "var data = msg.data;\nvar lastCount = global.get(\"hourLastCount\");\nvar lastTime = global.get(\"hourLastTime\");\nvar lastup = global.get(\"hourLastUp\");\nvar uptime = msg.uptime;\nvar dTime = (uptime - lastup);\nif (dTime >= 3600) {\n    global.set(\"hourLastCount\", data[0]);\n    global.set(\"hourLastTime\", data[1]);\n    global.set(\"hourLastUp\", uptime);\n    var avg = (data[0] - lastCount) / dTime;\n    msg.payload = avg.toFixed(3);\n    msg.topic = \"1 Hr\";\n    return [msg,msg];\n} else {\n    return [null, msg];\n}",
+        "func": "var hour = msg.hour\nif (hour === true) {\n    var data = msg.data;\n    var lastCount = global.get(\"hourLastCount\");\n    var lastTime = global.get(\"hourLastTime\");\n    var lastup = global.get(\"hourLastUp\");\n    var uptime = msg.uptime;\n    var dTime = (uptime - lastup);\n    global.set(\"hourLastCount\", data[0]);\n    global.set(\"hourLastTime\", data[1]);\n    global.set(\"hourLastUp\", uptime);\n    var avg = (data[0] - lastCount) / dTime;\n    msg.payload = avg.toFixed(3);\n    msg.topic = \"1 Hr\";\n    return [msg,msg];\n} else {\n    return [null, msg];\n}",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
@@ -480,19 +480,19 @@
         "y": 940,
         "wires": [
             [
-                "07201ba9e41fe224",
-                "4951398f18cf7759",
-                "7e492075461da806"
+                "6de61ac852a051b0",
+                "cb854796ce98fc9e",
+                "2a0774053e265059"
             ],
             [
-                "1bdcdab13942aada"
+                "b29017cc77e85127"
             ]
         ]
     },
     {
-        "id": "4fc446d273f95848",
+        "id": "d8bcb30515be6062",
         "type": "debug",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Average Rate",
         "active": false,
         "tosidebar": true,
@@ -507,9 +507,9 @@
         "wires": []
     },
     {
-        "id": "a671a3a5a2edad57",
+        "id": "7a9291d87bc62c86",
         "type": "ui_gauge",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "group": "5213ed1253eb0c1d",
         "order": 2,
@@ -535,9 +535,9 @@
         "wires": []
     },
     {
-        "id": "9a95ecb626193859",
+        "id": "cf775dbbb7032473",
         "type": "ui_chart",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Total Rate",
         "group": "5213ed1253eb0c1d",
         "order": 3,
@@ -579,9 +579,9 @@
         ]
     },
     {
-        "id": "19740a2291c8ac63",
+        "id": "58109fab46ec9151",
         "type": "change",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Move uptime",
         "rules": [
             {
@@ -601,14 +601,14 @@
         "y": 540,
         "wires": [
             [
-                "f66243f980a66460"
+                "2fe47e196e57d146"
             ]
         ]
     },
     {
-        "id": "7e492075461da806",
+        "id": "2a0774053e265059",
         "type": "ui_chart",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Rate",
         "group": "949f46b1b01f6ddf",
         "order": 1,
@@ -650,9 +650,9 @@
         ]
     },
     {
-        "id": "fedc4701c1075b45",
+        "id": "5986096db8ef31e6",
         "type": "ui_gauge",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Min Rate",
         "group": "a6e56fb9fb9db01b",
         "order": 1,
@@ -678,9 +678,9 @@
         "wires": []
     },
     {
-        "id": "050a722ce34c7fe5",
+        "id": "dd8fb86fd9663da2",
         "type": "debug",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "1 Min",
         "active": false,
         "tosidebar": true,
@@ -695,9 +695,9 @@
         "wires": []
     },
     {
-        "id": "bbebf31bac14ccab",
+        "id": "f756b240d0a6549b",
         "type": "debug",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "5 Min",
         "active": false,
         "tosidebar": true,
@@ -712,9 +712,9 @@
         "wires": []
     },
     {
-        "id": "07201ba9e41fe224",
+        "id": "6de61ac852a051b0",
         "type": "ui_gauge",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "group": "27412869603f94c9",
         "order": 1,
@@ -740,9 +740,9 @@
         "wires": []
     },
     {
-        "id": "4951398f18cf7759",
+        "id": "cb854796ce98fc9e",
         "type": "debug",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "debug 5",
         "active": false,
         "tosidebar": true,
@@ -756,9 +756,9 @@
         "wires": []
     },
     {
-        "id": "f66243f980a66460",
+        "id": "2fe47e196e57d146",
         "type": "ui_text",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "group": "5213ed1253eb0c1d",
         "order": 5,
         "width": 0,
@@ -773,9 +773,9 @@
         "wires": []
     },
     {
-        "id": "42db5915a558cfb2",
+        "id": "c939202fb4c38941",
         "type": "comment",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Serail In",
         "info": "",
         "x": 110,
@@ -783,9 +783,9 @@
         "wires": []
     },
     {
-        "id": "abf712143ec26d4c",
+        "id": "7c05b36b554d7e53",
         "type": "ui_text",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "group": "5213ed1253eb0c1d",
         "order": 6,
         "width": 0,
@@ -800,9 +800,9 @@
         "wires": []
     },
     {
-        "id": "63194e6fdf2dbd02",
+        "id": "6e375e980f68089e",
         "type": "function",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "ms to Clock",
         "func": "var time = (new Date(msg.timeTotalms * 1000)).toUTCString().match(/(\\d\\d:\\d\\d:\\d\\d)/)[0];\nmsg.payload = time;\nreturn msg;",
         "outputs": 1,
@@ -814,14 +814,14 @@
         "y": 580,
         "wires": [
             [
-                "abf712143ec26d4c"
+                "7c05b36b554d7e53"
             ]
         ]
     },
     {
-        "id": "8e5908713477aeb6",
+        "id": "9e302dfca5559d54",
         "type": "link out",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "To double",
         "mode": "link",
         "links": [
@@ -832,9 +832,9 @@
         "wires": []
     },
     {
-        "id": "595545c09eef748c",
+        "id": "a378a414a23d27d2",
         "type": "delay",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "pauseType": "delay",
         "timeout": "100",
@@ -852,14 +852,14 @@
         "y": 360,
         "wires": [
             [
-                "19d24a4f0f5bc545"
+                "33b85faaff90b83b"
             ]
         ]
     },
     {
-        "id": "0a592267f1585ba1",
+        "id": "e2453141ff7e2a57",
         "type": "ui_gauge",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "5 Min Rate",
         "group": "87ee9eb71baf647f",
         "order": 1,
@@ -885,9 +885,9 @@
         "wires": []
     },
     {
-        "id": "7fd55d82258683a7",
+        "id": "e55dacd73114b699",
         "type": "function",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Instant Rate ",
         "func": "var d = msg.payload.trim();\nvar data = d.split(\" \");\nvar uptime = (data[1] - data[4]);\nvar lastTime = global.get(\"iLastTime\");\nglobal.set(\"iLastTime\", uptime);\n//var iCount = global.get(\"iLastCount\");\n//global.set(\"iLastCount\", data[0]);\n//var avg = (data[0] -iCount) / (uptime - lastTime);\nvar avg = 1 / ((uptime - lastTime) / 1000);\ndata[6] = avg.toFixed(2);\nmsg.payload = avg.toFixed(3);\nmsg.data = data;\nmsg.topic = \"Instant Rate\";\nreturn msg;",
         "outputs": 1,
@@ -899,17 +899,17 @@
         "y": 420,
         "wires": [
             [
-                "9178b635d0011d4e",
-                "f98137b5597cc70d",
-                "9a95ecb626193859",
-                "45ef6d15180f6027"
+                "fa928c08b3b45e54",
+                "9cbe7dd44ddcb00f",
+                "cf775dbbb7032473",
+                "4e85d7fbea2f1fc4"
             ]
         ]
     },
     {
-        "id": "03ac0a2dfd0ffadb",
+        "id": "22a9f5a818f46403",
         "type": "ui_text",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "group": "5213ed1253eb0c1d",
         "order": 4,
         "width": 0,
@@ -924,9 +924,9 @@
         "wires": []
     },
     {
-        "id": "e7c008f650d8f3cf",
+        "id": "749ae7e8f101a82b",
         "type": "inject",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "props": [
             {
@@ -944,15 +944,15 @@
         "y": 660,
         "wires": [
             [
-                "9a95ecb626193859",
-                "7e492075461da806"
+                "cf775dbbb7032473",
+                "2a0774053e265059"
             ]
         ]
     },
     {
-        "id": "0160594fbf60d997",
+        "id": "113a1be84c46cf5f",
         "type": "inject",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "props": [
             {
@@ -977,9 +977,9 @@
         ]
     },
     {
-        "id": "69258ea6fd3f15b6",
+        "id": "50991b166555389c",
         "type": "inject",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "props": [
             {
@@ -1004,9 +1004,9 @@
         ]
     },
     {
-        "id": "dcebfb6430a054fe",
+        "id": "0d9525d827fcf3f0",
         "type": "ui_led",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "order": 1,
         "group": "5213ed1253eb0c1d",
         "width": 0,
@@ -1030,14 +1030,14 @@
         "shape": "circle",
         "showGlow": true,
         "name": "Hit led",
-        "x": 630,
+        "x": 670,
         "y": 260,
         "wires": []
     },
     {
-        "id": "be4628635e405821",
+        "id": "1f744c6202a8a30b",
         "type": "trigger",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "op1": "true",
         "op2": "false",
@@ -1055,14 +1055,14 @@
         "y": 260,
         "wires": [
             [
-                "dcebfb6430a054fe"
+                "0d9525d827fcf3f0"
             ]
         ]
     },
     {
-        "id": "1bdcdab13942aada",
+        "id": "b29017cc77e85127",
         "type": "gate",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "controlTopic": "control",
         "defaultState": "closed",
@@ -1077,14 +1077,14 @@
         "y": 1060,
         "wires": [
             [
-                "c2084f95de6ea353"
+                "9e68acb3423ceb7e"
             ]
         ]
     },
     {
-        "id": "eb1653883abff168",
+        "id": "fb413d3863405fc1",
         "type": "ui_switch",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "label": "Save Data Plus",
         "tooltip": "",
@@ -1111,15 +1111,15 @@
         "y": 1060,
         "wires": [
             [
-                "1bdcdab13942aada",
-                "a9b087b487e937c1"
+                "b29017cc77e85127",
+                "c96580a7963403b0"
             ]
         ]
     },
     {
-        "id": "718d1b2dfd8ec287",
+        "id": "79ed15269d02bb84",
         "type": "inject",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "props": [
             {
@@ -1141,14 +1141,14 @@
         "y": 1000,
         "wires": [
             [
-                "eb1653883abff168"
+                "fb413d3863405fc1"
             ]
         ]
     },
     {
-        "id": "4d5b865e2a1a0940",
+        "id": "102371d54eca5d97",
         "type": "ui_switch",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "label": "Save Data",
         "tooltip": "",
@@ -1175,14 +1175,14 @@
         "y": 320,
         "wires": [
             [
-                "19d24a4f0f5bc545"
+                "33b85faaff90b83b"
             ]
         ]
     },
     {
-        "id": "19d24a4f0f5bc545",
+        "id": "33b85faaff90b83b",
         "type": "gate",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "controlTopic": "control",
         "defaultState": "open",
@@ -1197,14 +1197,14 @@
         "y": 360,
         "wires": [
             [
-                "79bd18eddf95249d"
+                "4ee7086c64309978"
             ]
         ]
     },
     {
-        "id": "228360111943831e",
+        "id": "41a84a1b76cedbcb",
         "type": "function",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Switch to ,",
         "func": "\nmsg.payload.replace(\" \",\",\");\n\nreturn msg;",
         "outputs": 1,
@@ -1216,14 +1216,14 @@
         "y": 380,
         "wires": [
             [
-                "595545c09eef748c"
+                "a378a414a23d27d2"
             ]
         ]
     },
     {
-        "id": "45ef6d15180f6027",
+        "id": "4e85d7fbea2f1fc4",
         "type": "debug",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Instant Rate",
         "active": false,
         "tosidebar": true,
@@ -1238,9 +1238,9 @@
         "wires": []
     },
     {
-        "id": "65c1d05de9e5cf4c",
+        "id": "11d8a06ea111dc21",
         "type": "ui_chart",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "Temp [C]",
         "group": "949f46b1b01f6ddf",
         "order": 1,
@@ -1282,9 +1282,9 @@
         ]
     },
     {
-        "id": "d161089b95f53555",
+        "id": "f70281816e658af3",
         "type": "inject",
-        "z": "6caafa316e63ba15",
+        "z": "44660e89f5734085",
         "name": "",
         "props": [
             {
@@ -1305,10 +1305,45 @@
         "x": 750,
         "y": 200,
         "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0112d7e49316cf43",
+        "type": "function",
+        "z": "44660e89f5734085",
+        "name": "function 3",
+        "func": "var lastup = global.get(\"minLastUpT\");\nvar uptime = msg.uptime;\nvar dTime = (uptime - lastup);\nmsg.dtime = dTime;\n//node.warn(\"lastup = \"+ dTime + \", uptime = \" + uptime);\nif (dTime >= 60) {\n    var  minLoop = global.get(\"minLoop\") + 1;\n    global.set(\"minLastUpT\", uptime);\n    msg.payload = minLoop + 1;\n    msg.oneMin = true;\n    if (minLoop === 5){\n        var fiveLoop = global.get(\"fiveLoop\");\n        minLoop = 0;\n        global.set(\"minLoop\", 0);\n        msg.fiveMin = true;\n        if (fiveLoop === 12){\n            msg.hour = true;\n            global.set(\"fiveLoop\", 0);\n        } else {\n            global.set(\"fiveLoop\", fiveLoop + 1);\n            msg.hour = false;\n        }\n    }else {\n        global.set(\"minLoop\", minLoop);\n        msg.fiveMin = false;\n        msg.hour = false;\n    }\n    return msg;\n} else {\n    msg.oneMin = false;\n    msg.fiveMin = false;\n    msg.hour = false;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 520,
+        "wires": [
             [
-                "4d5b865e2a1a0940"
+                "936dea12465e6147",
+                "227cda03c34e07b9"
             ]
         ]
+    },
+    {
+        "id": "936dea12465e6147",
+        "type": "debug",
+        "z": "44660e89f5734085",
+        "name": "debug 16",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 560,
+        "wires": []
     },
     {
         "id": "5213ed1253eb0c1d",
@@ -1322,7 +1357,7 @@
         "className": ""
     },
     {
-        "id": "c7cdfd066443399c",
+        "id": "78ca4bb3ec479a3e",
         "type": "serial-port",
         "serialport": "/dev/tty.usbserial-1230",
         "serialbaud": "9600",
