@@ -1,0 +1,1433 @@
+[
+    {
+        "id": "44660e89f5734085",
+        "type": "tab",
+        "label": "Cosmic Watch Live",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c2cc3db6d58c5157",
+        "type": "group",
+        "z": "44660e89f5734085",
+        "name": "",
+        "style": {
+            "fill": "#c8e7a7",
+            "label": true
+        },
+        "nodes": [
+            "997bced252ce6886",
+            "42bacdb55dd361d1",
+            "bcd961f22fe3e78c",
+            "6540c212e1652365",
+            "f46f23ccbba77c44",
+            "4e42efc9823fe54d"
+        ],
+        "x": 34,
+        "y": 39,
+        "w": 652,
+        "h": 162
+    },
+    {
+        "id": "bcd961f22fe3e78c",
+        "type": "inject",
+        "z": "44660e89f5734085",
+        "g": "c2cc3db6d58c5157",
+        "name": "Start Time",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "42bacdb55dd361d1",
+                "f46f23ccbba77c44"
+            ]
+        ]
+    },
+    {
+        "id": "42bacdb55dd361d1",
+        "type": "function",
+        "z": "44660e89f5734085",
+        "g": "c2cc3db6d58c5157",
+        "name": "File Name",
+        "func": "var a = new Date().toString();\nvar parts = a.split(\" \");\nvar t = parts[4].split(\":\");\nvar name = parts[3] + \"_\" + parts[1] + \"_\" + parts[2] + \"_\" +t[0]+t[1]+t[2];\n\n// !! Change the file location below, for your computer. !!!\nvar fullName = \"/Users/dkallenberg/Documents/CosmicWatch/CW_\" + name + \".txt\";\n\nglobal.set(\"filename\",fullName);\nmsg.filename = fullName;\nmsg.payload = \"CW_\"+ name;\nfullName = \"/Users/dkallenberg/Documents/CosmicWatch/CW_\" + name +\"Plus\"+ \".txt\"\nglobal.set(\"filenamePlus\", fullName);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 120,
+        "wires": [
+            [
+                "6540c212e1652365"
+            ]
+        ]
+    },
+    {
+        "id": "f46f23ccbba77c44",
+        "type": "function",
+        "z": "44660e89f5734085",
+        "g": "c2cc3db6d58c5157",
+        "name": "set Last",
+        "func": "global.set(\"minLastCount\",0);\nglobal.set(\"fiveLastCount\",0);\nglobal.set(\"hourLastCount\",0);\nglobal.set(\"minLastTime\", 0);\nglobal.set(\"fiveLastTime\", 0);\nglobal.set(\"hourLastTime\", 0);\nglobal.set(\"minLastUp\", 0);\nglobal.set(\"fiveLastUp\", 0);\nglobal.set(\"hourLastUp\", 0);\nglobal.set(\"iLastTime\", 0);\nglobal.set(\"iLastCount\", 0);\nglobal.set(\"minLoop\", 0);\nglobal.set(\"minLoopsLastUp\", 0);\nglobal.set(\"minLastT\", 0);\nglobal.set(\"minLastUpT\", 0);\nglobal.set(\"fiveLoop\", 0);\nglobal.set(\"hrLoop\", 0);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "997bced252ce6886",
+        "type": "inject",
+        "z": "44660e89f5734085",
+        "g": "c2cc3db6d58c5157",
+        "name": "12 AM New File",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 00 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "42bacdb55dd361d1"
+            ]
+        ]
+    },
+    {
+        "id": "6540c212e1652365",
+        "type": "ui_text",
+        "z": "44660e89f5734085",
+        "g": "c2cc3db6d58c5157",
+        "group": "5213ed1253eb0c1d",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "File Name",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 600,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "4e42efc9823fe54d",
+        "type": "comment",
+        "z": "44660e89f5734085",
+        "g": "c2cc3db6d58c5157",
+        "name": "Change the file location in the \"File Name\" function.",
+        "info": "",
+        "x": 430,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "9e68acb3423ceb7e",
+        "type": "function",
+        "z": "44660e89f5734085",
+        "name": "Add Filename",
+        "func": "msg.filename = global.get(\"filenamePlus\");\nvar data =\"\";\ndata = msg.data[0];\nvar i=1;\nwhile(i<10){\n    data = data + \",\" + msg.data[i];\n}\nmsg.payload = data;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 1060,
+        "wires": [
+            [
+                "2db93dd0f85418ed"
+            ]
+        ]
+    },
+    {
+        "id": "2db93dd0f85418ed",
+        "type": "delay",
+        "z": "44660e89f5734085",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "200",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1510,
+        "y": 1060,
+        "wires": [
+            [
+                "d6b5554d7f9f9bbc"
+            ]
+        ]
+    },
+    {
+        "id": "d6b5554d7f9f9bbc",
+        "type": "file",
+        "z": "44660e89f5734085",
+        "name": "",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1680,
+        "y": 1060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c96580a7963403b0",
+        "type": "debug",
+        "z": "44660e89f5734085",
+        "name": "debug 15",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "4ee7086c64309978",
+        "type": "function",
+        "z": "44660e89f5734085",
+        "name": "Add Filename",
+        "func": "msg.filename = global.get(\"filename\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 360,
+        "wires": [
+            [
+                "7611eae29e1ce193"
+            ]
+        ]
+    },
+    {
+        "id": "5e6f5764765204c9",
+        "type": "switch",
+        "z": "44660e89f5734085",
+        "name": "Line types",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "##########################################################################################\\n",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "### CosmicWatch: The Desktop Muon Detector",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "### Questions? saxani@mit.edu",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "### Comp_date Comp_time Event Ardn_time[ms] ADC[0-1023] SiPM[mV] Deadtime[ms] Temp[C] Name",
+                "vt": "str"
+            },
+            {
+                "t": "regex",
+                "v": "^FNL",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "\\b[0-9]+\\b \\b[0-9]+\\b \\b[0-9]+\\b \\d*\\.?\\d* \\b[0-9]+\\b \\d*\\.?\\d*",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 6,
+        "x": 270,
+        "y": 320,
+        "wires": [
+            [
+                "a378a414a23d27d2"
+            ],
+            [
+                "a378a414a23d27d2"
+            ],
+            [
+                "a378a414a23d27d2"
+            ],
+            [
+                "a378a414a23d27d2"
+            ],
+            [
+                "a378a414a23d27d2"
+            ],
+            [
+                "e55dacd73114b699",
+                "1f744c6202a8a30b",
+                "41a84a1b76cedbcb"
+            ]
+        ]
+    },
+    {
+        "id": "7611eae29e1ce193",
+        "type": "delay",
+        "z": "44660e89f5734085",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "200",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1170,
+        "y": 360,
+        "wires": [
+            [
+                "63f37bbb3bbb8fa6"
+            ]
+        ]
+    },
+    {
+        "id": "fa928c08b3b45e54",
+        "type": "debug",
+        "z": "44660e89f5734085",
+        "name": "debug 13",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "ce389ee75ea5ac23",
+        "type": "serial in",
+        "z": "44660e89f5734085",
+        "name": "CW2",
+        "serial": "78ca4bb3ec479a3e",
+        "x": 90,
+        "y": 520,
+        "wires": [
+            [
+                "5e6f5764765204c9",
+                "9e302dfca5559d54"
+            ]
+        ]
+    },
+    {
+        "id": "63f37bbb3bbb8fa6",
+        "type": "file",
+        "z": "44660e89f5734085",
+        "name": "",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1340,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9cbe7dd44ddcb00f",
+        "type": "function",
+        "z": "44660e89f5734085",
+        "name": "Average Rate",
+        "func": "var data = msg.data;\nvar uptime = (data[1] - data[4]) / 1000;\nmsg.uptime = uptime;\n//node.warn(data5[0]);\n//node.warn(data);\n\nif(data[0]>10){\n    var avg = (data[0] / uptime);\n    if(avg < 5){\n        msg.count = data[0];\n        var time = (new Date(uptime * 1000)).toUTCString().match(/(\\d\\d:\\d\\d:\\d\\d)/)[0];\n        msg.payload = avg.toFixed(3);\n        var onTime = data[1]/1000;\n        msg.timeTotalms = onTime;\n        //msg.timeTotal = (new Date(onTime)).toUTCString().match(/(\\d\\d:\\d\\d:\\d\\d)/)[1];\n        msg.topic = \"Average Rate\";\n        msg.uptimeDisplay = time;\n        msg.data [7] = avg.toFixed(3);\n        return [msg, msg];\n    }\n} else {\n    return [null,msg];\n}\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 460,
+        "wires": [
+            [
+                "7a9291d87bc62c86",
+                "58109fab46ec9151",
+                "d8bcb30515be6062",
+                "6e375e980f68089e",
+                "22a9f5a818f46403",
+                "2a0774053e265059"
+            ],
+            [
+                "0112d7e49316cf43"
+            ]
+        ]
+    },
+    {
+        "id": "227cda03c34e07b9",
+        "type": "function",
+        "z": "44660e89f5734085",
+        "name": "Min Rate",
+        "func": "var min = msg.oneMin;\nif(msg.oneMin === true){\n    var data = msg.data;\n    var lastCount = global.get(\"minLastCount\");\n    var lastTime = global.get(\"minLastTime\");\n    var lastup = global.get(\"minLastUp\");\n    var uptime = msg.uptime;\n    var dTime = (uptime - lastup);\n    global.set(\"minLastCount\", data[0]);\n    global.set(\"minLastTime\", data[1]);\n    global.set(\"minLastUp\", uptime);\n    var avg = (data[0]-lastCount) / dTime;\n    msg.payload = avg.toFixed(3);\n    msg.topic = \"1 Min\";\n    data[8]=avg.toFixed(3);\n    msg.data =data;\n    var msg2 ={payload: data[5], topic: \"Temp [C]\"};\n    return [msg, msg2, msg];\n} else{\n    return [ null, null, msg];\n}",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 680,
+        "wires": [
+            [
+                "2a0774053e265059",
+                "5986096db8ef31e6",
+                "dd8fb86fd9663da2"
+            ],
+            [
+                "11d8a06ea111dc21"
+            ],
+            [
+                "0140e20729bec04d"
+            ]
+        ]
+    },
+    {
+        "id": "0140e20729bec04d",
+        "type": "function",
+        "z": "44660e89f5734085",
+        "name": "5 Min Rate",
+        "func": "var fiveMin = msg.fiveMin;\nif (fiveMin === true) {\n    var data = msg.data;\n    var lastCount = global.get(\"fiveLastCount\");\n    var lastTime = global.get(\"fiveLastTime\");\n    var lastup = global.get(\"fiveLastUp\");\n    var uptime = msg.uptime;\n    var dTime = (uptime - lastup);\n    global.set(\"fiveLastCount\", data[0]);\n    global.set(\"fiveLastTime\", data[1]);\n    global.set(\"fiveLastUp\", uptime);\n    var avg = (data[0] - lastCount) / dTime;\n    msg.payload = avg.toFixed(3);\n    data[9]= msg.payload;\n    msg.data = data;\n    msg.topic = \"5 Min\";\n    return [msg, msg];\n} else {\n    return [null, msg];\n}",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 820,
+        "wires": [
+            [
+                "f756b240d0a6549b",
+                "e2453141ff7e2a57",
+                "2a0774053e265059"
+            ],
+            [
+                "9ef9843f30ba682f"
+            ]
+        ]
+    },
+    {
+        "id": "9ef9843f30ba682f",
+        "type": "function",
+        "z": "44660e89f5734085",
+        "name": "hour Rate",
+        "func": "var hour = msg.hour\nif (hour === true) {\n    var data = msg.data;\n    var lastCount = global.get(\"hourLastCount\");\n    var lastTime = global.get(\"hourLastTime\");\n    var lastup = global.get(\"hourLastUp\");\n    var uptime = msg.uptime;\n    var dTime = (uptime - lastup);\n    global.set(\"hourLastCount\", data[0]);\n    global.set(\"hourLastTime\", data[1]);\n    global.set(\"hourLastUp\", uptime);\n    var avg = (data[0] - lastCount) / dTime;\n    msg.payload = avg.toFixed(3);\n    msg.topic = \"1 Hr\";\n    return [msg,msg];\n} else {\n    return [null, msg];\n}",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 940,
+        "wires": [
+            [
+                "6de61ac852a051b0",
+                "cb854796ce98fc9e",
+                "2a0774053e265059"
+            ],
+            [
+                "b29017cc77e85127"
+            ]
+        ]
+    },
+    {
+        "id": "d8bcb30515be6062",
+        "type": "debug",
+        "z": "44660e89f5734085",
+        "name": "Average Rate",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1300,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "7a9291d87bc62c86",
+        "type": "ui_gauge",
+        "z": "44660e89f5734085",
+        "name": "",
+        "group": "5213ed1253eb0c1d",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Total Average Rate",
+        "label": "Hz",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "5",
+        "colors": [
+            "#d2c532",
+            "#2ca02c",
+            "#d2c532"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1310,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "cf775dbbb7032473",
+        "type": "ui_chart",
+        "z": "44660e89f5734085",
+        "name": "Total Rate",
+        "group": "5213ed1253eb0c1d",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Instant Rate",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "Waiting",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "1",
+        "removeOlderPoints": "1000",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1280,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "58109fab46ec9151",
+        "type": "change",
+        "z": "44660e89f5734085",
+        "name": "Move uptime",
+        "rules": [
+            {
+                "t": "move",
+                "p": "uptimeDisplay",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1090,
+        "y": 540,
+        "wires": [
+            [
+                "2fe47e196e57d146"
+            ]
+        ]
+    },
+    {
+        "id": "2a0774053e265059",
+        "type": "ui_chart",
+        "z": "44660e89f5734085",
+        "name": "Rate",
+        "group": "949f46b1b01f6ddf",
+        "order": 1,
+        "width": 18,
+        "height": 6,
+        "label": "",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Waiting",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#2ca02c",
+            "#aec7e8",
+            "#ff7f0e",
+            "#1f77b4",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1270,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5986096db8ef31e6",
+        "type": "ui_gauge",
+        "z": "44660e89f5734085",
+        "name": "Min Rate",
+        "group": "a6e56fb9fb9db01b",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "",
+        "label": "Hz",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "5",
+        "colors": [
+            "#e6e600",
+            "#2ca02c",
+            "#e6e600"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1280,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "dd8fb86fd9663da2",
+        "type": "debug",
+        "z": "44660e89f5734085",
+        "name": "1 Min",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1270,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "f756b240d0a6549b",
+        "type": "debug",
+        "z": "44660e89f5734085",
+        "name": "5 Min",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "6de61ac852a051b0",
+        "type": "ui_gauge",
+        "z": "44660e89f5734085",
+        "name": "",
+        "group": "27412869603f94c9",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "",
+        "label": "Hz",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "5",
+        "colors": [
+            "#e6e600",
+            "#2ca02c",
+            "#e6e600"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1250,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "cb854796ce98fc9e",
+        "type": "debug",
+        "z": "44660e89f5734085",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1260,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "2fe47e196e57d146",
+        "type": "ui_text",
+        "z": "44660e89f5734085",
+        "group": "5213ed1253eb0c1d",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Up Time:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 1280,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "c939202fb4c38941",
+        "type": "comment",
+        "z": "44660e89f5734085",
+        "name": "Serail In",
+        "info": "",
+        "x": 110,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "7c05b36b554d7e53",
+        "type": "ui_text",
+        "z": "44660e89f5734085",
+        "group": "5213ed1253eb0c1d",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Total time:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 1290,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "6e375e980f68089e",
+        "type": "function",
+        "z": "44660e89f5734085",
+        "name": "ms to Clock",
+        "func": "var time = (new Date(msg.timeTotalms * 1000)).toUTCString().match(/(\\d\\d:\\d\\d:\\d\\d)/)[0];\nmsg.payload = time;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1090,
+        "y": 580,
+        "wires": [
+            [
+                "7c05b36b554d7e53"
+            ]
+        ]
+    },
+    {
+        "id": "9e302dfca5559d54",
+        "type": "link out",
+        "z": "44660e89f5734085",
+        "name": "To double",
+        "mode": "link",
+        "links": [
+            "59fbf49eeba1bd26"
+        ],
+        "x": 305,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "a378a414a23d27d2",
+        "type": "delay",
+        "z": "44660e89f5734085",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 650,
+        "y": 360,
+        "wires": [
+            [
+                "33b85faaff90b83b"
+            ]
+        ]
+    },
+    {
+        "id": "e2453141ff7e2a57",
+        "type": "ui_gauge",
+        "z": "44660e89f5734085",
+        "name": "5 Min Rate",
+        "group": "87ee9eb71baf647f",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "",
+        "label": "Hz",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "5",
+        "colors": [
+            "#e6e600",
+            "#2ca02c",
+            "#e6e600"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1270,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "e55dacd73114b699",
+        "type": "function",
+        "z": "44660e89f5734085",
+        "name": "Instant Rate ",
+        "func": "var d = msg.payload.trim();\nvar data = d.split(\" \");\nvar uptime = (data[1] - data[4]);\nvar lastTime = global.get(\"iLastTime\");\nglobal.set(\"iLastTime\", uptime);\n//var iCount = global.get(\"iLastCount\");\n//global.set(\"iLastCount\", data[0]);\n//var avg = (data[0] -iCount) / (uptime - lastTime);\nvar avg = 1 / ((uptime - lastTime) / 1000);\ndata[6] = avg.toFixed(2);\nmsg.payload = avg.toFixed(3);\nmsg.data = data;\nmsg.topic = \"Instant Rate\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 420,
+        "wires": [
+            [
+                "fa928c08b3b45e54",
+                "9cbe7dd44ddcb00f",
+                "cf775dbbb7032473",
+                "4e85d7fbea2f1fc4"
+            ]
+        ]
+    },
+    {
+        "id": "22a9f5a818f46403",
+        "type": "ui_text",
+        "z": "44660e89f5734085",
+        "group": "5213ed1253eb0c1d",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Count",
+        "format": "{{msg.count}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1070,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "749ae7e8f101a82b",
+        "type": "inject",
+        "z": "44660e89f5734085",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[]",
+        "payloadType": "str",
+        "x": 630,
+        "y": 660,
+        "wires": [
+            [
+                "cf775dbbb7032473",
+                "2a0774053e265059"
+            ]
+        ]
+    },
+    {
+        "id": "113a1be84c46cf5f",
+        "type": "inject",
+        "z": "44660e89f5734085",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "5 min",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 500,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "50991b166555389c",
+        "type": "inject",
+        "z": "44660e89f5734085",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.2",
+        "topic": "1 min",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 500,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0d9525d827fcf3f0",
+        "type": "ui_led",
+        "z": "44660e89f5734085",
+        "order": 1,
+        "group": "5213ed1253eb0c1d",
+        "width": 0,
+        "height": 0,
+        "label": "Hit",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#000000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#00ff00",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Hit led",
+        "x": 670,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "1f744c6202a8a30b",
+        "type": "trigger",
+        "z": "44660e89f5734085",
+        "name": "",
+        "op1": "true",
+        "op2": "false",
+        "op1type": "bool",
+        "op2type": "bool",
+        "duration": "100",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 480,
+        "y": 260,
+        "wires": [
+            [
+                "0d9525d827fcf3f0"
+            ]
+        ]
+    },
+    {
+        "id": "b29017cc77e85127",
+        "type": "gate",
+        "z": "44660e89f5734085",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "closed",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 1150,
+        "y": 1060,
+        "wires": [
+            [
+                "9e68acb3423ceb7e"
+            ]
+        ]
+    },
+    {
+        "id": "fb413d3863405fc1",
+        "type": "ui_switch",
+        "z": "44660e89f5734085",
+        "name": "",
+        "label": "Save Data Plus",
+        "tooltip": "",
+        "group": "5213ed1253eb0c1d",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "Control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "open",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "close",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 960,
+        "y": 1060,
+        "wires": [
+            [
+                "b29017cc77e85127",
+                "c96580a7963403b0"
+            ]
+        ]
+    },
+    {
+        "id": "79ed15269d02bb84",
+        "type": "inject",
+        "z": "44660e89f5734085",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.05",
+        "topic": "Control",
+        "payload": "close",
+        "payloadType": "str",
+        "x": 840,
+        "y": 1000,
+        "wires": [
+            [
+                "fb413d3863405fc1"
+            ]
+        ]
+    },
+    {
+        "id": "102371d54eca5d97",
+        "type": "ui_switch",
+        "z": "44660e89f5734085",
+        "name": "",
+        "label": "Save Data",
+        "tooltip": "",
+        "group": "5213ed1253eb0c1d",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "Control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "open",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "close",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 650,
+        "y": 320,
+        "wires": [
+            [
+                "33b85faaff90b83b"
+            ]
+        ]
+    },
+    {
+        "id": "33b85faaff90b83b",
+        "type": "gate",
+        "z": "44660e89f5734085",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "open",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 830,
+        "y": 360,
+        "wires": [
+            [
+                "4ee7086c64309978"
+            ]
+        ]
+    },
+    {
+        "id": "41a84a1b76cedbcb",
+        "type": "function",
+        "z": "44660e89f5734085",
+        "name": "Switch to ,",
+        "func": "\nmsg.payload.replace(\" \",\",\");\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 380,
+        "wires": [
+            [
+                "a378a414a23d27d2"
+            ]
+        ]
+    },
+    {
+        "id": "4e85d7fbea2f1fc4",
+        "type": "debug",
+        "z": "44660e89f5734085",
+        "name": "Instant Rate",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "11d8a06ea111dc21",
+        "type": "ui_chart",
+        "z": "44660e89f5734085",
+        "name": "Temp [C]",
+        "group": "949f46b1b01f6ddf",
+        "order": 1,
+        "width": 18,
+        "height": "4",
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Waiting",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#2ca02c",
+            "#aec7e8",
+            "#ff7f0e",
+            "#1f77b4",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1280,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f70281816e658af3",
+        "type": "inject",
+        "z": "44660e89f5734085",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.09",
+        "topic": "",
+        "payload": "close",
+        "payloadType": "str",
+        "x": 830,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0112d7e49316cf43",
+        "type": "function",
+        "z": "44660e89f5734085",
+        "name": "function 3",
+        "func": "var lastup = global.get(\"minLastUpT\");\nvar uptime = msg.uptime;\nvar dTime = (uptime - lastup);\nmsg.dtime = dTime;\n//node.warn(\"lastup = \"+ dTime + \", uptime = \" + uptime);\nif (dTime >= 60) {\n    var  minLoop = global.get(\"minLoop\") + 1;\n    global.set(\"minLastUpT\", uptime);\n    msg.payload = minLoop + 1;\n    msg.oneMin = true;\n    if (minLoop === 5){\n        var fiveLoop = global.get(\"fiveLoop\");\n        minLoop = 0;\n        global.set(\"minLoop\", 0);\n        msg.fiveMin = true;\n        if (fiveLoop === 12){\n            msg.hour = true;\n            global.set(\"fiveLoop\", 0);\n        } else {\n            global.set(\"fiveLoop\", fiveLoop + 1);\n            msg.hour = false;\n        }\n    }else {\n        global.set(\"minLoop\", minLoop);\n        msg.fiveMin = false;\n        msg.hour = false;\n    }\n    return msg;\n} else {\n    msg.oneMin = false;\n    msg.fiveMin = false;\n    msg.hour = false;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 520,
+        "wires": [
+            [
+                "936dea12465e6147",
+                "227cda03c34e07b9"
+            ]
+        ]
+    },
+    {
+        "id": "936dea12465e6147",
+        "type": "debug",
+        "z": "44660e89f5734085",
+        "name": "debug 16",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "5213ed1253eb0c1d",
+        "type": "ui_group",
+        "name": "Instant and Other",
+        "tab": "3ad1cd10ca15b6ac",
+        "order": 1,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "78ca4bb3ec479a3e",
+        "type": "serial-port",
+        "serialport": "/dev/tty.usbserial-1230",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "949f46b1b01f6ddf",
+        "type": "ui_group",
+        "name": "Rate Graph",
+        "tab": "3ad1cd10ca15b6ac",
+        "order": 5,
+        "disp": true,
+        "width": 18,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a6e56fb9fb9db01b",
+        "type": "ui_group",
+        "name": "1 min Rate [Hz]",
+        "tab": "3ad1cd10ca15b6ac",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "27412869603f94c9",
+        "type": "ui_group",
+        "name": "1hr Rate [Hz]",
+        "tab": "3ad1cd10ca15b6ac",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "87ee9eb71baf647f",
+        "type": "ui_group",
+        "name": "5 min Rate [Hz]",
+        "tab": "3ad1cd10ca15b6ac",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3ad1cd10ca15b6ac",
+        "type": "ui_tab",
+        "name": "CosmicWatch Live",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
